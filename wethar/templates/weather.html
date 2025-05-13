@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Погода в {{ weather.city }}, {{ weather.country }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card weather-card mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="card-title mb-0">{{ weather.city }}</h2>
+                        <small class="text-muted">{{ weather.description }}</small>
+                    </div>
+                    <img src="{{ weather.country_flag }}"
+                         alt="{{ weather.country }}"
+                         class="country-flag shadow-sm"
+                         title="Код страны: {{ weather.country }}">
+                </div>
+
+                <div class="row align-items-center mb-4">
+                    <div class="col-6 text-center">
+                        <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@4x.png"
+                             alt="Weather icon"
+                             class="weather-icon mb-2">
+                        <h3 class="display-4 mb-0">{{ weather.temperature }}°C</h3>
+                        <small class="text-muted">Ощущается как {{ weather.feels_like }}°C</small>
+                    </div>
+                    <div class="col-6">
+                        <div class="weather-details">
+                            <div class="detail-item">
+                                <i class="fas fa-tint text-primary"></i>
+                                <span>Влажность: {{ weather.humidity }}%</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-wind text-info"></i>
+                                <span>Ветер: {{ weather.wind_speed }} м/с</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-thermometer-half text-danger"></i>
+                                <span>Давление: {{ weather.pressure }} гПа</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sun-times bg-light p-3 rounded mb-4">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <i class="fas fa-sunrise text-warning"></i>
+                            <div class="sun-time">Восход: {{ weather.sunrise }}</div>
+                        </div>
+                        <div class="col-6">
+                            <i class="fas fa-sunset text-warning"></i>
+                            <div class="sun-time">Закат: {{ weather.sunset }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Назад
+                    </a>
+                    <small class="text-muted">Обновлено: {{ weather.updated }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
